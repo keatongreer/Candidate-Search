@@ -1,17 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&display=swap');
+
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Inter Tight', system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
 }
 
 a {
@@ -24,8 +23,16 @@ a:hover {
 }
 
 body {
+  background: linear-gradient(
+    180deg,
+    rgb(32, 44, 136) 0%,
+    rgba(9, 9, 121, 1) 15%,
+    rgba(0, 2, 18, 1) 100%
+  );
+  background-size: cover;
+  background-repeat: no-repeat no-repeat;
+  background-position: center center;
   margin: 0;
-  display: flex;
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
@@ -66,4 +73,48 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+main {
+  color: #fff;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+tr {
+  border-radius: 10px;
+  background-color: #000;
+  color: white;
+}
+
+tbody tr:nth-child(odd) {
+  background-color: #333333;
+}
+
+.nav {
+  display: flex;
+  justify-content: flex-start;
+  padding: 1em 2em;
+}
+
+.nav-item {
+  padding: 0 0.5rem;
+  list-style: none;
+}
+
+.nav-link {
+  color: #fff;
+  text-decoration: none;
+}
+
+.active {
+  font-weight: 700;
+}
+
+.table {
+  width: 80vw;
+  table-layout: fixed;
 }
