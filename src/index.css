@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&display=swap");
 
 :root {
-  font-family: 'Inter Tight', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: "Inter Tight", system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -117,4 +117,23 @@ tbody tr:nth-child(odd) {
 .table {
   width: 80vw;
   table-layout: fixed;
+}
+
+.card {
+  background-color: #1a1a1a;
+  border-radius: 20px;
+  padding: 40px; /* remove when image added */
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.rejectCandidate {
+  background-color: red;
+}
+
+.acceptCandidate {
+  background-color: green;
 }
