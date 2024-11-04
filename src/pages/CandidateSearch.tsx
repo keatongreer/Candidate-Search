@@ -52,9 +52,29 @@ const CandidateSearch = () => {
     }
   };
 
-  const acceptCandidate = () => {};
+  const acceptCandidate = () => {
+    // add candidate to local storage of saved candidates
+    let parsedSavedCandidates: Candidate[] = [];
+    const storedSavedCandidates = localStorage.getItem("savedCandidates");
+    if (typeof storedSavedCandidates === "string") {
+      parsedSavedCandidates = JSON.parse(storedSavedCandidates);
+    }
+    parsedSavedCandidates.push(currentCandidate);
+    localStorage.setItem(
+      "savedCandidates",
+      JSON.stringify(parsedSavedCandidates)
+    );
+
+    // move to next candidate
+    nextCandidate();
+  };
 
   const rejectCandidate = () => {
+    // move to next candidate
+    nextCandidate();
+  };
+
+  const nextCandidate = () => {
     // remove current candidate from the array of potential candidates
     setPotentialCandidates(
       potentialCandidates.splice(
@@ -63,7 +83,7 @@ const CandidateSearch = () => {
       )
     );
 
-    // set current candidate
+    // move on to next candidate
     setCurrentCandidate(potentialCandidates[0]);
   };
 
