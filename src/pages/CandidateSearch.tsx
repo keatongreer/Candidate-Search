@@ -91,16 +91,6 @@ const CandidateSearch = () => {
     fetchCandidates();
   }, []);
 
-  const addToSavedCandidates = () => {
-    let parsedCandidates: Candidate[] = [];
-    const storedCandidates = localStorage.getItem("filmsToWatch");
-    if (typeof storedCandidates === "string") {
-      parsedCandidates = JSON.parse(storedCandidates);
-    }
-    parsedCandidates.push(currentCandidate);
-    localStorage.setItem("savedCandidates", JSON.stringify(parsedCandidates));
-  };
-
   return (
     <div className="card">
       <img src={currentCandidate.avatar_url} className="card-img-top" />
