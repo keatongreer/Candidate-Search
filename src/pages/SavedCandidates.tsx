@@ -1,4 +1,30 @@
+import Candidate from "../interfaces/Candidate.interface";
+import { useState, useEffect } from "react";
+
 const SavedCandidates = () => {
+  const [parsedSavedCandidates, setParsedSavedCandidates] = useState<
+    Candidate[]
+  >([]);
+
+  useEffect(() => {
+    const storedSavedCandidates = localStorage.getItem("savedCandidates");
+    if (typeof storedSavedCandidates === "string") {
+      setParsedSavedCandidates(JSON.parse(storedSavedCandidates));
+    }
+  }, []);
+
+  const rejectCandidate = (candidateLogin: string) => {
+    // Remove candidate at candidateIndex
+    const updatedCandidates = parsedSavedCandidates.filter(
+      (candidate) => candidate.login !== candidateLogin
+    );
+
+    // Update localStorage with modified list
+    localStorage.setItem("savedCandidates", JSON.stringify(updatedCandidates));
+
+    setParsedSavedCandidates(updatedCandidates);
+  };
+
   return (
     <table>
       <thead>
@@ -13,17 +39,30 @@ const SavedCandidates = () => {
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td>
-            <button className="rejectCandidate">-</button>
-          </td>
-        </tr>
+        {parsedSavedCandidates.map((candidate) => (
+          <tr key={candidate.login}>
+            <td>
+              <img
+                src={candidate.avatar_url}
+                alt={`${candidate.name}'s avatar`}
+                width="50"
+              />
+            </td>
+            <td>{candidate.name}</td>
+            <td>{candidate.location}</td>
+            <td>{candidate.email}</td>
+            <td>{candidate.company}</td>
+            <td>{candidate.bio}</td>
+            <td>
+              <button
+                className="rejectCandidate"
+                onClick={() => rejectCandidate(candidate.login)}
+              >
+                -
+              </button>
+            </td>
+          </tr>
+        ))}
       </tbody>
     </table>
   );
