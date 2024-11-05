@@ -44,14 +44,15 @@ const SavedCandidates = () => {
             <td>
               <img
                 src={candidate.avatar_url}
-                alt={`${candidate.name}'s avatar`}
+                alt={`${candidate.name || candidate.login}'s avatar`}
+                width="200px"
               />
             </td>
-            <td>{candidate.name}</td>
-            <td>{candidate.location}</td>
-            <td>{candidate.email}</td>
-            <td>{candidate.company}</td>
-            <td>{candidate.bio}</td>
+            <td>{candidate.name || "N/A"}</td>
+            <td>{candidate.location || "N/A"}</td>
+            <td>{candidate.email || "N/A"}</td>
+            <td>{candidate.company || "N/A"}</td>
+            <td>{candidate.bio || "N/A"}</td>
             <td>
               <button
                 className="rejectCandidate"
