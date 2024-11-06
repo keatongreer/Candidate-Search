@@ -48,7 +48,9 @@ const SavedCandidates = () => {
                 width="100px"
               />
             </td>
-            <td>{candidate.name || "N/A"}</td>
+            <td>
+              {candidate.name} ({candidate.login})
+            </td>
             <td>{candidate.location || "N/A"}</td>
             <td>{candidate.email || "N/A"}</td>
             <td>{candidate.company || "N/A"}</td>
