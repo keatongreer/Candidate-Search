@@ -3,15 +3,15 @@ import { searchGithub, searchGithubUser } from "../api/API";
 import Candidate from "../interfaces/Candidate.interface";
 
 const CandidateSearch = () => {
-  const [currentCandidate, setCurrentCandidate] = useState<Candidate | null>(
-    null
-  );
+  const [currentCandidate, setCurrentCandidate] = useState<Candidate>();
   const [potentialCandidates, setPotentialCandidates] = useState<Candidate[]>(
     []
   );
+  const [fetchingData, setFetchingData] = useState(true);
 
   const fetchCandidates = async () => {
     try {
+      setFetchingData(true);
       const data = await searchGithub();
       const candidateLogins: string[] = data.map((user: any) => user.login);
 
@@ -21,16 +21,18 @@ const CandidateSearch = () => {
         try {
           const user = await searchGithubUser(login);
 
-          candidateData.push({
-            login: user.login,
-            name: user.name || null,
-            location: user.location || null,
-            email: user.email || null,
-            company: user.company || null,
-            bio: user.bio || null,
-            avatar_url: user.avatar_url,
-            html_url: user.html_url,
-          });
+          if (user.login) {
+            candidateData.push({
+              login: user.login,
+              name: user.name || null,
+              location: user.location || null,
+              email: user.email || null,
+              company: user.company || null,
+              bio: user.bio || null,
+              avatar_url: user.avatar_url,
+              html_url: user.html_url,
+            });
+          }
         } catch (error: any) {
           if (error.response?.status === 404) {
             console.log(`User with login ${login} not found. Skipping.`);
@@ -39,9 +41,14 @@ const CandidateSearch = () => {
           }
         }
       }
-
+      console.log(candidateData);
       setPotentialCandidates(candidateData);
-      if (candidateData.length > 0) setCurrentCandidate(candidateData[0]);
+
+      if (candidateData.length > 0) {
+        setCurrentCandidate(candidateData[0]);
+      }
+
+      setFetchingData(false);
     } catch (error) {
       console.error("Error fetching candidate data:", error);
     }
@@ -66,20 +73,27 @@ const CandidateSearch = () => {
   };
 
   const nextCandidate = () => {
-    setPotentialCandidates((prevCandidates) => {
-      const updatedCandidates = prevCandidates.filter(
-        (candidate) => candidate.login !== currentCandidate?.login
-      );
-      setCurrentCandidate(updatedCandidates[0] || null);
-      return updatedCandidates;
-    });
+    console.log(potentialCandidates.length);
+    if (potentialCandidates.length === 1) {
+      fetchCandidates();
+    } else {
+      setPotentialCandidates((prevCandidates) => {
+        const updatedCandidates = prevCandidates.filter(
+          (candidate) => candidate.login !== currentCandidate?.login
+        );
+        console.log(updatedCandidates);
+        console.log(currentCandidate);
+        setCurrentCandidate(updatedCandidates[0]);
+        return updatedCandidates;
+      });
+    }
   };
 
   useEffect(() => {
     fetchCandidates();
   }, []);
 
-  return currentCandidate ? (
+  return currentCandidate && !fetchingData ? (
     <div className="card">
       <img
         src={currentCandidate.avatar_url}
