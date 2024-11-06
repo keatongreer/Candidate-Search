@@ -55,7 +55,7 @@ const SavedCandidates = () => {
             <td>{candidate.email || "N/A"}</td>
             <td>{candidate.company || "N/A"}</td>
             <td>{candidate.bio || "N/A"}</td>
-            <td>
+            <td className="tableRejectButton">
               <button
                 className="rejectCandidate"
                 onClick={() => rejectCandidate(candidate.login)}
