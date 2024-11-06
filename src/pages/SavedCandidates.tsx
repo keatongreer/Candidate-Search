@@ -45,7 +45,7 @@ const SavedCandidates = () => {
               <img
                 src={candidate.avatar_url}
                 alt={`${candidate.name || candidate.login}'s avatar`}
-                width="200px"
+                width="100px"
               />
             </td>
             <td>{candidate.name || "N/A"}</td>
