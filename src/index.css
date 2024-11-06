@@ -46,13 +46,14 @@ h1 {
 button {
   border-radius: 8px;
   border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
+  padding: 0.5em;
+  font-size: 2em;
   font-weight: 500;
   font-family: inherit;
   background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
+  width: 40%;
 }
 button:hover {
   border-color: #646cff;
@@ -122,12 +123,23 @@ tbody tr:nth-child(odd) {
 .card {
   background-color: #1a1a1a;
   border-radius: 20px;
-  padding: 40px; /* remove when image added */
+  max-width: 300px;
 }
 
 .buttons {
   display: flex;
   justify-content: space-between;
+  padding: 1em;
+}
+
+.card-body {
+  padding: 1em;
+}
+
+.card-text {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
 }
 
 .rejectCandidate {
