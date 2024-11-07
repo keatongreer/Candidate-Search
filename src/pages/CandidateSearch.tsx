@@ -41,7 +41,6 @@ const CandidateSearch = () => {
           }
         }
       }
-      console.log(candidateData);
       setPotentialCandidates(candidateData);
 
       if (candidateData.length > 0) {
@@ -73,7 +72,6 @@ const CandidateSearch = () => {
   };
 
   const nextCandidate = () => {
-    console.log(potentialCandidates.length);
     if (potentialCandidates.length === 1) {
       fetchCandidates();
     } else {
@@ -81,8 +79,6 @@ const CandidateSearch = () => {
         const updatedCandidates = prevCandidates.filter(
           (candidate) => candidate.login !== currentCandidate?.login
         );
-        console.log(updatedCandidates);
-        console.log(currentCandidate);
         setCurrentCandidate(updatedCandidates[0]);
         return updatedCandidates;
       });
@@ -94,33 +90,36 @@ const CandidateSearch = () => {
   }, []);
 
   return currentCandidate && !fetchingData ? (
-    <div className="card">
-      <img
-        src={currentCandidate.avatar_url}
-        className="card-img-top"
-        alt="Candidate avatar"
-        width="300px"
-      />
-      <div className="card-body">
-        <h5 className="card-title">
-          {currentCandidate.name} ({currentCandidate.login})
-        </h5>
-        <div className="card-text">
-          <p>Location: {currentCandidate.location || "None"}</p>
-          <p>Email: {currentCandidate.email || "None"}</p>
-          <p>Company: {currentCandidate.company || "None"}</p>
-          <p>Bio: {currentCandidate.bio || "None"}</p>
+    <>
+      <h1>Candidate Search</h1>
+      <div className="card">
+        <img
+          src={currentCandidate.avatar_url}
+          className="card-image"
+          alt="Candidate avatar"
+          width="300px"
+        />
+        <div className="card-body">
+          <h5 className="card-title">
+            {currentCandidate.name} ({currentCandidate.login})
+          </h5>
+          <div className="card-text">
+            <p>Location: {currentCandidate.location || "None"}</p>
+            <p>Email: {currentCandidate.email || "None"}</p>
+            <p>Company: {currentCandidate.company || "None"}</p>
+            <p>Bio: {currentCandidate.bio || "None"}</p>
+          </div>
+        </div>
+        <div className="buttons">
+          <button className="rejectCandidate" onClick={rejectCandidate}>
+            -
+          </button>
+          <button className="acceptCandidate" onClick={acceptCandidate}>
+            +
+          </button>
         </div>
       </div>
-      <div className="buttons">
-        <button className="rejectCandidate" onClick={rejectCandidate}>
-          -
-        </button>
-        <button className="acceptCandidate" onClick={acceptCandidate}>
-          +
-        </button>
-      </div>
-    </div>
+    </>
   ) : (
     <h1>Searching for candidates...</h1>
   );

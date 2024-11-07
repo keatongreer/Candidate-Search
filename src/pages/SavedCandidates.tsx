@@ -26,47 +26,51 @@ const SavedCandidates = () => {
   };
 
   return (
-    <table>
-      <thead>
-        <tr>
-          <th>Image</th>
-          <th>Name</th>
-          <th>Location</th>
-          <th>Email</th>
-          <th>Company</th>
-          <th>Bio</th>
-          <th>Reject</th>
-        </tr>
-      </thead>
-      <tbody>
-        {parsedSavedCandidates.map((candidate) => (
-          <tr key={candidate.login}>
-            <td>
-              <img
-                src={candidate.avatar_url}
-                alt={`${candidate.name || candidate.login}'s avatar`}
-                width="100px"
-              />
-            </td>
-            <td>
-              {candidate.name} ({candidate.login})
-            </td>
-            <td>{candidate.location || "N/A"}</td>
-            <td>{candidate.email || "N/A"}</td>
-            <td>{candidate.company || "N/A"}</td>
-            <td>{candidate.bio || "N/A"}</td>
-            <td className="tableRejectButton">
-              <button
-                className="rejectCandidate"
-                onClick={() => rejectCandidate(candidate.login)}
-              >
-                -
-              </button>
-            </td>
+    <>
+      <h1>Potential Candidates</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Location</th>
+            <th>Email</th>
+            <th>Company</th>
+            <th>Bio</th>
+            <th>Reject</th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {parsedSavedCandidates.map((candidate) => (
+            <tr key={candidate.login}>
+              <td>
+                <img
+                  src={candidate.avatar_url}
+                  alt={`${candidate.name || candidate.login}'s avatar`}
+                  width="100px"
+                  className="candidateImage"
+                />
+              </td>
+              <td>
+                {candidate.name} ({candidate.login})
+              </td>
+              <td>{candidate.location || "N/A"}</td>
+              <td>{candidate.email || "N/A"}</td>
+              <td>{candidate.company || "N/A"}</td>
+              <td>{candidate.bio || "N/A"}</td>
+              <td className="tableRejectButton">
+                <button
+                  className="rejectCandidate"
+                  onClick={() => rejectCandidate(candidate.login)}
+                >
+                  -
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </>
   );
 };
 
