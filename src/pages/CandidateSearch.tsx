@@ -120,8 +120,10 @@ const CandidateSearch = () => {
         </div>
       </div>
     </>
-  ) : (
+  ) : fetchingData ? (
     <h1>Searching for candidates...</h1>
+  ) : (
+    <h1>No candidates to display.</h1>
   );
 };
 
